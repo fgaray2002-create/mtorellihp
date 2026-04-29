@@ -21,7 +21,7 @@
         #libro { 
             width: 800px; 
             height: 500px; 
-            box-shadow: 0 0 40px rgba(0,0,0,0.9);
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
         .page { 
             width: 400px; 
@@ -38,103 +38,143 @@
             margin-top: 25px; 
             color: white; 
             text-align: center; 
-            line-height: 1.6;
+            line-height: 1.5;
+        }
+        .controles small {
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
     <div id="libro">
-        <!-- Asegúrate de que las imágenes NO tengan espacios en el nombre -->
         <div class="page"><img src="img1.jpg" alt="Página 1"></div>
         <div class="page"><img src="img2.jpg" alt="Página 2"></div>
         <div class="page"><img src="img3.jpg" alt="Página 3"></div>
-        <!-- ... continúa hasta la 36 ... -->
+        <div class="page"><img src="img4.jpg" alt="Página 4"></div>
+        <div class="page"><img src="img5.jpg" alt="Página 5"></div>
+        <div class="page"><img src="img6.jpg" alt="Página 6"></div>
+        <div class="page"><img src="img7.jpg" alt="Página 7"></div>
+        <div class="page"><img src="img8.jpg" alt="Página 8"></div>
+        <div class="page"><img src="img9.jpg" alt="Página 9"></div>
+        <div class="page"><img src="img10.jpg" alt="Página 10"></div>
+        <div class="page"><img src="img11.jpg" alt="Página 11"></div>
+        <div class="page"><img src="img12.jpg" alt="Página 12"></div>
+        <div class="page"><img src="img13.jpg" alt="Página 13"></div>
+        <div class="page"><img src="img14.jpg" alt="Página 14"></div>
+        <div class="page"><img src="img15.jpg" alt="Página 15"></div>
+        <div class="page"><img src="img16.jpg" alt="Página 16"></div>
+        <div class="page"><img src="img17.jpg" alt="Página 17"></div>
+        <div class="page"><img src="img18.jpg" alt="Página 18"></div>
+        <div class="page"><img src="img19.jpg" alt="Página 19"></div>
+        <div class="page"><img src="img20.jpg" alt="Página 20"></div>
+        <div class="page"><img src="img21.jpg" alt="Página 21"></div>
+        <div class="page"><img src="img22.jpg" alt="Página 22"></div>
+        <div class="page"><img src="img23.jpg" alt="Página 23"></div>
+        <div class="page"><img src="img24.jpg" alt="Página 24"></div>
+        <div class="page"><img src="img25.jpg" alt="Página 25"></div>
+        <div class="page"><img src="img26.jpg" alt="Página 26"></div>
+        <div class="page"><img src="img27.jpg" alt="Página 27"></div>
+        <div class="page"><img src="img28.jpg" alt="Página 28"></div>
+        <div class="page"><img src="img29.jpg" alt="Página 29"></div>
+        <div class="page"><img src="img30.jpg" alt="Página 30"></div>
+        <div class="page"><img src="img31.jpg" alt="Página 31"></div>
+        <div class="page"><img src="img32.jpg" alt="Página 32"></div>
+        <div class="page"><img src="img33.jpg" alt="Página 33"></div>
+        <div class="page"><img src="img34.jpg" alt="Página 34"></div>
+        <div class="page"><img src="img35.jpg" alt="Página 35"></div>
         <div class="page"><img src="img36.jpg" alt="Página 36"></div>
     </div>
 
     <div class="controles">
-        Usa las esquinas o haz clic para pasar páginas.<br>
-        Flechas ← → del teclado también funcionan.<br>
-        <small>(Haz clic en la pantalla para habilitar el sonido)</small>
+        Usa las esquinas para pasar las páginas o haz clic en ellas.<br>
+        <small>(Haz clic en cualquier parte de la pantalla para habilitar el sonido)</small>
     </div>
 
     <audio id="reproductor" loop></audio>
 
     <script>
-        $(window).on('load', function() {   // Mejor que $(document).ready() para turn.js
-
+        $(document).ready(function() {
             const audio = document.getElementById('reproductor');
             let musicaActual = "";
 
-            // Inicializar Turn.js
-            const libro = $("#libro");
-
-            libro.turn({
+            // Inicializar el Flipbook
+            $("#libro").turn({
                 width: 800,
                 height: 500,
-                pages: 36,
+                pages: 36,           // Muy importante
                 autoCenter: true,
-                display: 'double',
+                display: 'double',   // Modo libro abierto (dos páginas)
                 gradients: true,
                 acceleration: true,
-                elevation: 50,
-                when: {
-                    turned: function(event, page, view) {
-                        const paginasVisibles = view || [page];
-                        const paginaActual = Math.max(...paginasVisibles);
-
-                        let nuevaMusica = "";
-
-                        if (paginaActual >= 3 && paginaActual <= 5) nuevaMusica = "1.mp3";
-                        else if (paginaActual === 6) nuevaMusica = "2.mp3";
-                        else if (paginaActual >= 7 && paginaActual <= 10) nuevaMusica = "3.mp3";
-                        else if (paginaActual >= 11 && paginaActual <= 12) nuevaMusica = "4.mp3";
-                        else if (paginaActual >= 13 && paginaActual <= 14) nuevaMusica = "5.mp3";
-                        else if (paginaActual >= 15 && paginaActual <= 16) nuevaMusica = "6.mp3";
-                        else if (paginaActual >= 17 && paginaActual <= 18) nuevaMusica = "7.mp3";
-                        else if (paginaActual >= 19 && paginaActual <= 20) nuevaMusica = "8.mp3";
-                        else if (paginaActual >= 21 && paginaActual <= 22) nuevaMusica = "9.mp3";
-                        else if (paginaActual >= 23 && paginaActual <= 24) nuevaMusica = "10.mp3";
-                        else if (paginaActual >= 25 && paginaActual <= 26) nuevaMusica = "11.mp3";
-                        else if (paginaActual >= 27 && paginaActual <= 28) nuevaMusica = "12.mp3";
-                        else if (paginaActual >= 29 && paginaActual <= 30) nuevaMusica = "13.mp3";
-                        else if (paginaActual >= 31 && paginaActual <= 32) nuevaMusica = "14.mp3";
-                        else if (paginaActual >= 33 && paginaActual <= 34) nuevaMusica = "15.mp3";
-                        else if (paginaActual >= 35 && paginaActual <= 36) nuevaMusica = "16.mp3";
-
-                        if (nuevaMusica && nuevaMusica !== musicaActual) {
-                            musicaActual = nuevaMusica;
-                            audio.src = nuevaMusica;
-                            audio.play().catch(() => {});
-                        } else if (!nuevaMusica) {
-                            audio.pause();
-                            musicaActual = "";
-                        }
-                    }
-                }
+                elevation: 50
             });
 
-            // === NAVEGACIÓN CON FLECHAS DEL TECLADO ===
-            $(document).on('keydown', function(e) {
-                if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-                    libro.turn('next');
-                    e.preventDefault();   // evita scroll de la página
+            // Evento cuando se completa el giro de página
+            $("#libro").bind("turned", function(event, page, view) {
+                // 'view' contiene las páginas que se están mostrando actualmente
+                // Ej: [3,4], [5,6], [1], etc.
+                const paginasVisibles = view || [page];
+                // Usamos la página más alta visible para decidir la música
+                const paginaActual = Math.max(...paginasVisibles);
+
+                let nuevaMusica = "";
+
+                // === LÓGICA DE AUDIOS ===
+                if (paginaActual >= 3 && paginaActual <= 5) {
+                    nuevaMusica = "1.mp3";
+                } else if (paginaActual === 6) {
+                    nuevaMusica = "2.mp3";
+                } else if (paginaActual >= 7 && paginaActual <= 10) {
+                    nuevaMusica = "3.mp3";
+                } else if (paginaActual >= 11 && paginaActual <= 12) {
+                    nuevaMusica = "4.mp3";
+                } else if (paginaActual >= 13 && paginaActual <= 14) {
+                    nuevaMusica = "5.mp3";
+                } else if (paginaActual >= 15 && paginaActual <= 16) {
+                    nuevaMusica = "6.mp3";
+                } else if (paginaActual >= 17 && paginaActual <= 18) {
+                    nuevaMusica = "7.mp3";
+                } else if (paginaActual >= 19 && paginaActual <= 20) {
+                    nuevaMusica = "8.mp3";
+                } else if (paginaActual >= 21 && paginaActual <= 22) {
+                    nuevaMusica = "9.mp3";
+                } else if (paginaActual >= 23 && paginaActual <= 24) {
+                    nuevaMusica = "10.mp3";
+                } else if (paginaActual >= 25 && paginaActual <= 26) {
+                    nuevaMusica = "11.mp3";
+                } else if (paginaActual >= 27 && paginaActual <= 28) {
+                    nuevaMusica = "12.mp3";
+                } else if (paginaActual >= 29 && paginaActual <= 30) {
+                    nuevaMusica = "13.mp3";
+                } else if (paginaActual >= 31 && paginaActual <= 32) {
+                    nuevaMusica = "14.mp3";
+                } else if (paginaActual >= 33 && paginaActual <= 34) {
+                    nuevaMusica = "15.mp3";
+                } else if (paginaActual >= 35 && paginaActual <= 36) {
+                    nuevaMusica = "16.mp3";
+                }
+
+                // Cambiar música solo si es diferente
+                if (nuevaMusica && nuevaMusica !== musicaActual) {
+                    musicaActual = nuevaMusica;
+                    audio.src = nuevaMusica;
+                    audio.play().catch(() => {
+                        console.log("Reproducción bloqueada por el navegador. Haz clic para activar el audio.");
+                    });
                 } 
-                else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-                    libro.turn('previous');
-                    e.preventDefault();
+                else if (!nuevaMusica && musicaActual) {
+                    // Pausar si volvemos a páginas sin música (1-2)
+                    audio.pause();
+                    musicaActual = "";
                 }
             });
 
-            // Habilitar audio con clic/touch
+            // Habilitar audio con cualquier clic (importante por políticas de browsers)
             $(document).on('click touchstart', function() {
                 if (audio.paused && musicaActual) {
                     audio.play().catch(() => {});
                 }
             });
-
-            // Opcional: Ir a la página 1 al cargar
-            // libro.turn('page', 1);
         });
     </script>
 </body>
